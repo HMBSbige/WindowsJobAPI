@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32.SafeHandles;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -11,16 +12,17 @@ namespace WindowsJobAPI
 	/// </summary>
 	public class JobObject : IDisposable
 	{
-		private IntPtr _handle;
+		private SafeJobHandle _handle;
 
 		public JobObject()
 		{
-			_handle = WinApi.CreateJobObject(IntPtr.Zero, null);
+			_handle = new SafeJobHandle(WinApi.CreateJobObject(IntPtr.Zero, $@"{nameof(JobObject)}{Process.GetCurrentProcess().Id}"));
 
 			var extendedInfoPtr = IntPtr.Zero;
+
 			var info = new JOBOBJECT_BASIC_LIMIT_INFORMATION
 			{
-				LimitFlags = 0x2000
+				LimitFlags = JOBOBJECTLIMIT.KillOnJobClose
 			};
 
 			var extendedInfo = new JOBOBJECT_EXTENDED_LIMIT_INFORMATION
@@ -48,53 +50,45 @@ namespace WindowsJobAPI
 			}
 		}
 
-		public bool AddProcess(IntPtr processHandle)
+		#region AddProcess
+
+		public bool AddProcess(SafeProcessHandle processHandle)
 		{
+			if (_disposedValue)
+			{
+				throw new ObjectDisposedException(GetType().FullName);
+			}
 			return WinApi.AssignProcessToJobObject(_handle, processHandle);
+		}
+
+		public bool AddProcess(Process process)
+		{
+			return AddProcess(process.SafeHandle);
 		}
 
 		public bool AddProcess(int processId)
 		{
-			return AddProcess(Process.GetProcessById(processId).Handle);
+			using var process = Process.GetProcessById(processId);
+			return AddProcess(process);
 		}
+
+		#endregion
 
 		#region IDisposable
 
 		private volatile bool _disposedValue;
 
-		protected virtual void Dispose(bool disposing)
+		public void Dispose()
 		{
 			if (_disposedValue)
 			{
 				return;
 			}
 
-			if (disposing)
-			{
-				// 释放托管状态(托管对象)
-			}
-
-			// 释放未托管的资源(未托管的对象)并替代终结器
-			// 将大型字段设置为 null
-
-			if (_handle != IntPtr.Zero)
-			{
-				WinApi.CloseHandle(_handle);
-				_handle = IntPtr.Zero;
-			}
+			_handle.Dispose();
+			_handle = null;
 
 			_disposedValue = true;
-		}
-
-		~JobObject()
-		{
-			Dispose(false);
-		}
-
-		public void Dispose()
-		{
-			Dispose(true);
-			GC.SuppressFinalize(this);
 		}
 
 		#endregion

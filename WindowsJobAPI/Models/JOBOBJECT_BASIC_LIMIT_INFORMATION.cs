@@ -8,7 +8,7 @@ namespace WindowsJobAPI.Models
 	{
 		public long PerProcessUserTimeLimit;
 		public long PerJobUserTimeLimit;
-		public uint LimitFlags;
+		public JOBOBJECTLIMIT LimitFlags;
 		public UIntPtr MinimumWorkingSetSize;
 		public UIntPtr MaximumWorkingSetSize;
 		public uint ActiveProcessLimit;
