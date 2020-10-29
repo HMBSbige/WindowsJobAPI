@@ -15,6 +15,7 @@ var process = new Process
         FileName = @"cmd"
     }
 };
+process.Start();
 
 var job = new JobObject();
 
