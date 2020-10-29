@@ -16,7 +16,7 @@ namespace WindowsJobAPI
 
 		public JobObject()
 		{
-			_handle = new SafeJobHandle(WinApi.CreateJobObject(IntPtr.Zero, $@"{nameof(JobObject)}{Process.GetCurrentProcess().Id}"));
+			_handle = new SafeJobHandle(WinApi.CreateJobObject(IntPtr.Zero, null));
 
 			var extendedInfoPtr = IntPtr.Zero;
 
