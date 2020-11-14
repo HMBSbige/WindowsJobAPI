@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32.SafeHandles;
+using Microsoft.Win32.SafeHandles;
 using System;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
@@ -10,7 +10,7 @@ namespace WindowsJobAPI
 	internal static class WinApi
 	{
 		[DllImport(@"kernel32.dll", CharSet = CharSet.Unicode)]
-		public static extern IntPtr CreateJobObject(IntPtr a, string lpName);
+		public static extern IntPtr CreateJobObject(IntPtr a, string? lpName);
 
 		[DllImport(@"kernel32.dll", SetLastError = true)]
 		public static extern bool SetInformationJobObject(SafeJobHandle hJob, JobObjectInfoType infoType, IntPtr lpJobObjectInfo, uint cbJobObjectInfoLength);

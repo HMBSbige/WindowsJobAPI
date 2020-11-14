@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32.SafeHandles;
+using Microsoft.Win32.SafeHandles;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -12,7 +12,7 @@ namespace WindowsJobAPI
 	/// </summary>
 	public class JobObject : IDisposable
 	{
-		private SafeJobHandle _handle;
+		private readonly SafeJobHandle _handle;
 
 		public JobObject()
 		{
@@ -86,7 +86,6 @@ namespace WindowsJobAPI
 			}
 
 			_handle.Dispose();
-			_handle = null;
 
 			_disposedValue = true;
 		}

@@ -1,18 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;netcoreapp3.1</TargetFrameworks>
-		<LangVersion>latest</LangVersion>
-		<Copyright>Copyright © HMBSbige 2020</Copyright>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Authors>HMBSbige</Authors>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageProjectUrl>https://github.com/HMBSbige/WindowsJobAPI</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/HMBSbige/WindowsJobAPI</RepositoryUrl>
-		<PackageTags>windows jobapi2 job</PackageTags>
-		<Version>1.1.0</Version>
-		<PackageId>WindowsJobAPI</PackageId>
-		<Description>Kill child processes when parent process is killed.</Description>
-	</PropertyGroup>
+    <PropertyGroup>
+        <TargetFrameworks>net5.0-windows;netcoreapp3.1;netstandard2.0</TargetFrameworks>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <Copyright>Copyright © HMBSbige 2020</Copyright>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Authors>HMBSbige</Authors>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/HMBSbige/WindowsJobAPI</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/HMBSbige/WindowsJobAPI</RepositoryUrl>
+        <PackageTags>windows jobapi2 job</PackageTags>
+        <Version>5.0.0</Version>
+        <PackageId>WindowsJobAPI</PackageId>
+        <Description>Kill child processes when parent process is killed.</Description>
+    </PropertyGroup>
 
 </Project>

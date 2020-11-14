@@ -1,4 +1,4 @@
-﻿namespace WindowsJobAPI.Models
+namespace WindowsJobAPI.Models
 {
 	internal enum JobObjectInfoType
 	{
