@@ -1,5 +1,4 @@
 using Microsoft.Win32.SafeHandles;
-using System;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Security;
@@ -10,28 +9,34 @@ namespace WindowsJobAPI
 	internal static class WinApi
 	{
 		[DllImport(@"kernel32.dll", CharSet = CharSet.Unicode)]
-		public static extern IntPtr CreateJobObject(IntPtr a, string? lpName);
+		public static extern nint CreateJobObject(nint a, string? lpName);
 
-		[DllImport(@"kernel32.dll", SetLastError = true)]
-		public static extern bool SetInformationJobObject(SafeJobHandle hJob, JobObjectInfoType infoType, IntPtr lpJobObjectInfo, uint cbJobObjectInfoLength);
+		[DllImport(@"kernel32.dll")]
+		public static extern bool SetInformationJobObject(SafeJobHandle hJob, JobObjectInfoType infoType, nint lpJobObjectInfo, uint cbJobObjectInfoLength);
 
-		[DllImport(@"kernel32.dll", SetLastError = true)]
+		[DllImport(@"kernel32.dll")]
+		[return: MarshalAs(UnmanagedType.Bool)]
 		public static extern bool AssignProcessToJobObject(SafeJobHandle job, SafeProcessHandle process);
 
 		[DllImport(@"kernel32.dll", SetLastError = true)]
-		[return: MarshalAs(UnmanagedType.Bool)]
+#if NETSTANDARD
 		[ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-		public static extern bool CloseHandle(IntPtr hObject);
+#endif
+		[SuppressUnmanagedCodeSecurity]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		public static extern bool CloseHandle(nint hObject);
 
 		[DllImport(@"kernel32.dll",
 				EntryPoint = @"TerminateJobObject",
 				CharSet = CharSet.Unicode,
 				ExactSpelling = true,
 				SetLastError = true)]
+#if NETSTANDARD
 		[ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+#endif
 		[SuppressUnmanagedCodeSecurity]
 		public static extern bool TerminateJobObject(
-				[In] IntPtr hJob,
+				[In] nint hJob,
 				[In] uint uExitCode);
 	}
 }

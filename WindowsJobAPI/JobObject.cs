@@ -16,9 +16,9 @@ namespace WindowsJobAPI
 
 		public JobObject()
 		{
-			_handle = new SafeJobHandle(WinApi.CreateJobObject(IntPtr.Zero, null));
+			_handle = new SafeJobHandle(WinApi.CreateJobObject(0, null));
 
-			var extendedInfoPtr = IntPtr.Zero;
+			nint extendedInfoPtr = 0;
 
 			var info = new JOBOBJECT_BASIC_LIMIT_INFORMATION
 			{
@@ -43,7 +43,7 @@ namespace WindowsJobAPI
 			}
 			finally
 			{
-				if (extendedInfoPtr != IntPtr.Zero)
+				if (extendedInfoPtr != 0)
 				{
 					Marshal.FreeHGlobal(extendedInfoPtr);
 				}

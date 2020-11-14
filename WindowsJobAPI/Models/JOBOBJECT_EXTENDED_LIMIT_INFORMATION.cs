@@ -1,4 +1,3 @@
-using System;
 using System.Runtime.InteropServices;
 
 namespace WindowsJobAPI.Models
@@ -8,9 +7,9 @@ namespace WindowsJobAPI.Models
 	{
 		public JOBOBJECT_BASIC_LIMIT_INFORMATION BasicLimitInformation;
 		public IO_COUNTERS IoInfo;
-		public UIntPtr ProcessMemoryLimit;
-		public UIntPtr JobMemoryLimit;
-		public UIntPtr PeakProcessMemoryUsed;
-		public UIntPtr PeakJobMemoryUsed;
+		public nuint ProcessMemoryLimit;
+		public nuint JobMemoryLimit;
+		public nuint PeakProcessMemoryUsed;
+		public nuint PeakJobMemoryUsed;
 	}
 }

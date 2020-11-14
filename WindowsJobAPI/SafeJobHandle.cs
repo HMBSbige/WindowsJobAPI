@@ -1,11 +1,10 @@
 using Microsoft.Win32.SafeHandles;
-using System;
 
 namespace WindowsJobAPI
 {
 	public sealed class SafeJobHandle : SafeHandleZeroOrMinusOneIsInvalid
 	{
-		public SafeJobHandle(IntPtr handle) : base(true)
+		public SafeJobHandle(nint handle) : base(true)
 		{
 			SetHandle(handle);
 		}

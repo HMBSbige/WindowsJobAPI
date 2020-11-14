@@ -1,4 +1,3 @@
-using System;
 using System.Runtime.InteropServices;
 
 namespace WindowsJobAPI.Models
@@ -9,10 +8,10 @@ namespace WindowsJobAPI.Models
 		public long PerProcessUserTimeLimit;
 		public long PerJobUserTimeLimit;
 		public JOBOBJECTLIMIT LimitFlags;
-		public UIntPtr MinimumWorkingSetSize;
-		public UIntPtr MaximumWorkingSetSize;
+		public nuint MinimumWorkingSetSize;
+		public nuint MaximumWorkingSetSize;
 		public uint ActiveProcessLimit;
-		public UIntPtr Affinity;
+		public nuint Affinity;
 		public uint PriorityClass;
 		public uint SchedulingClass;
 	}
