@@ -10,7 +10,7 @@ namespace WindowsJobAPI
 	/// <summary>
 	/// https://stackoverflow.com/a/9164742
 	/// </summary>
-	public class JobObject : IDisposable
+	public sealed class JobObject : IDisposable
 	{
 		private readonly SafeJobHandle _handle;
 
