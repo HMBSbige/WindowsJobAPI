@@ -16,4 +16,8 @@
         <Description>Kill child processes when parent process is killed.</Description>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="PInvoke.Kernel32" Version="0.7.78" />
+    </ItemGroup>
+
 </Project>

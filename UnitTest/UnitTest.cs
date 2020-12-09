@@ -35,7 +35,7 @@ namespace UnitTest
 			var process = CreateCmd();
 
 			var job = new JobObject();
-			Assert.IsTrue(job.AddProcess(process.SafeHandle));
+			Assert.IsTrue(job.AddProcess(process.Handle));
 
 			Assert.IsFalse(process.HasExited);
 

@@ -1,9 +1,8 @@
-using Microsoft.Win32.SafeHandles;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using WindowsJobAPI.Models;
+using static PInvoke.Kernel32;
 
 namespace WindowsJobAPI
 {
@@ -12,17 +11,17 @@ namespace WindowsJobAPI
 	/// </summary>
 	public sealed class JobObject : IDisposable
 	{
-		private readonly SafeJobHandle _handle;
+		private readonly SafeObjectHandle _handle;
 
 		public JobObject()
 		{
-			_handle = new SafeJobHandle(WinApi.CreateJobObject(0, null));
+			_handle = CreateJobObject((nint)0, null);
 
 			nint extendedInfoPtr = 0;
 
 			var info = new JOBOBJECT_BASIC_LIMIT_INFORMATION
 			{
-				LimitFlags = JOBOBJECTLIMIT.KillOnJobClose
+				LimitFlags = JOB_OBJECT_LIMIT_FLAGS.JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE
 			};
 
 			var extendedInfo = new JOBOBJECT_EXTENDED_LIMIT_INFORMATION
@@ -36,7 +35,7 @@ namespace WindowsJobAPI
 				extendedInfoPtr = Marshal.AllocHGlobal(length);
 				Marshal.StructureToPtr(extendedInfo, extendedInfoPtr, false);
 
-				if (!WinApi.SetInformationJobObject(_handle, JobObjectInfoType.ExtendedLimitInformation, extendedInfoPtr, (uint)length))
+				if (!SetInformationJobObject(_handle, JOBOBJECTINFOCLASS.JobObjectExtendedLimitInformation, extendedInfoPtr, (uint)length))
 				{
 					throw new Win32Exception($@"Unable to set information. Error: {Marshal.GetLastWin32Error()}");
 				}
@@ -52,18 +51,19 @@ namespace WindowsJobAPI
 
 		#region AddProcess
 
-		public bool AddProcess(SafeProcessHandle processHandle)
+		public bool AddProcess(nint processHandle)
 		{
 			if (_disposedValue)
 			{
 				throw new ObjectDisposedException(GetType().FullName);
 			}
-			return WinApi.AssignProcessToJobObject(_handle, processHandle);
+			var safeHandle = new SafeObjectHandle(processHandle, false);
+			return AssignProcessToJobObject(_handle, safeHandle);
 		}
 
 		public bool AddProcess(Process process)
 		{
-			return AddProcess(process.SafeHandle);
+			return AddProcess(process.Handle);
 		}
 
 		public bool AddProcess(int processId)
