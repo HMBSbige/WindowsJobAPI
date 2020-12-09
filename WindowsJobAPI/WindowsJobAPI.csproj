@@ -11,7 +11,7 @@
         <PackageProjectUrl>https://github.com/HMBSbige/WindowsJobAPI</PackageProjectUrl>
         <RepositoryUrl>https://github.com/HMBSbige/WindowsJobAPI</RepositoryUrl>
         <PackageTags>windows jobapi2 job</PackageTags>
-        <Version>5.0.0</Version>
+        <Version>5.0.1</Version>
         <PackageId>WindowsJobAPI</PackageId>
         <Description>Kill child processes when parent process is killed.</Description>
     </PropertyGroup>
