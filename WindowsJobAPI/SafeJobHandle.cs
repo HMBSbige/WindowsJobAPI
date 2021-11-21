@@ -1,19 +1,16 @@
-using Microsoft.Win32.SafeHandles;
+namespace WindowsJobAPI;
 
-namespace WindowsJobAPI
+public sealed class SafeJobHandle : SafeHandleZeroOrMinusOneIsInvalid
 {
-	public sealed class SafeJobHandle : SafeHandleZeroOrMinusOneIsInvalid
+	public SafeJobHandle(nint handle) : base(true)
 	{
-		public SafeJobHandle(nint handle) : base(true)
-		{
-			SetHandle(handle);
-		}
+		SetHandle(handle);
+	}
 
-		protected override bool ReleaseHandle()
-		{
-			WinApi.TerminateJobObject(handle, 0);
+	protected override bool ReleaseHandle()
+	{
+		WinApi.TerminateJobObject(handle, 0);
 
-			return WinApi.CloseHandle(handle);
-		}
+		return WinApi.CloseHandle(handle);
 	}
 }
