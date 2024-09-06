@@ -5,7 +5,7 @@
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <Authors>HMBSbige</Authors>
-    <Copyright>Copyright © 2020 - 2023 HMBSbige</Copyright>
+    <Copyright>Copyright © 2020 - 2024 HMBSbige</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/HMBSbige/WindowsJobAPI</PackageProjectUrl>
     <RepositoryUrl>https://github.com/HMBSbige/WindowsJobAPI</RepositoryUrl>
