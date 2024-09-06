@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using WindowsJobAPI;
 
 namespace UnitTest;
@@ -7,6 +8,7 @@ namespace UnitTest;
 [TestClass]
 public class UnitTest
 {
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	private static Process CreateCmd()
 	{
 		var process = new Process { StartInfo = { UseShellExecute = false, FileName = @"cmd" } };
