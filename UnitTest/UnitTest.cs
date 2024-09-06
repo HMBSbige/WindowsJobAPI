@@ -95,9 +95,10 @@ public class UnitTest
 		Assert.IsFalse(process2.HasExited);
 	}
 
-#if DEBUG
-	[TestMethod]
+#if !DEBUG
+	[Ignore]
 #endif
+	[TestMethod]
 	public void TestManualKillParentProcess()
 	{
 		var process = new Process { StartInfo = { UseShellExecute = true, FileName = @"cmd" } };
