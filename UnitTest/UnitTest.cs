@@ -9,7 +9,7 @@ public class UnitTest
 {
 	private static Process CreateCmd()
 	{
-		var process = new Process { StartInfo = { UseShellExecute = false, FileName = @"cmd" } };
+		Process process = new() { StartInfo = { UseShellExecute = false, FileName = @"cmd" } };
 		process.Start();
 		return process;
 	}
@@ -17,9 +17,9 @@ public class UnitTest
 	[TestMethod]
 	public void TestDispose()
 	{
-		var process = CreateCmd();
+		Process process = CreateCmd();
 
-		var job = new JobObject();
+		JobObject job = new();
 		Assert.IsTrue(job.AddProcess(process));
 
 		Assert.IsFalse(process.HasExited);
@@ -31,9 +31,9 @@ public class UnitTest
 	[TestMethod]
 	public void TestAddSafeHandle()
 	{
-		var process = CreateCmd();
+		Process process = CreateCmd();
 
-		var job = new JobObject();
+		JobObject job = new();
 		Assert.IsTrue(job.AddProcess(process.SafeHandle));
 
 		Assert.IsFalse(process.HasExited);
@@ -45,10 +45,9 @@ public class UnitTest
 	[TestMethod]
 	public void TestAddId()
 	{
-		var process = new Process { StartInfo = { UseShellExecute = false, FileName = @"cmd" } };
-		process.Start();
+		Process process = CreateCmd();
 
-		var job = new JobObject();
+		JobObject job = new();
 		Assert.IsTrue(job.AddProcess(process.Id));
 
 		Assert.IsFalse(process.HasExited);
@@ -60,13 +59,13 @@ public class UnitTest
 	[TestMethod]
 	public void TestInstance()
 	{
-		var process = CreateCmd();
-		var job = new JobObject();
+		Process process = CreateCmd();
+		JobObject job = new();
 		Assert.IsTrue(job.AddProcess(process));
 		Assert.IsFalse(process.HasExited);
 
-		var process2 = CreateCmd();
-		var job2 = new JobObject();
+		Process process2 = CreateCmd();
+		JobObject job2 = new();
 		Assert.IsTrue(job2.AddProcess(process2));
 		Assert.IsFalse(process2.HasExited);
 		job2.Dispose();
@@ -80,10 +79,10 @@ public class UnitTest
 	[TestMethod]
 	public void TestManualKillChildProcess()
 	{
-		var process = CreateCmd();
-		var process2 = CreateCmd();
+		Process process = CreateCmd();
+		Process process2 = CreateCmd();
 
-		using var job = new JobObject();
+		using JobObject job = new();
 		Assert.IsTrue(job.AddProcess(process));
 		Assert.IsTrue(job.AddProcess(process2));
 
@@ -102,11 +101,11 @@ public class UnitTest
 	[TestMethod]
 	public void TestManualKillParentProcess()
 	{
-		var process = new Process { StartInfo = { UseShellExecute = true, FileName = @"cmd" } };
+		Process process = new() { StartInfo = { UseShellExecute = true, FileName = @"cmd" } };
 		process.Start();
 
 		/*using*/
-		var job = new JobObject();
+		JobObject job = new();
 		Assert.IsTrue(job.AddProcess(process));
 		Assert.IsFalse(process.HasExited);
 		process.WaitForExit((int)TimeSpan.FromSeconds(5).TotalMilliseconds);

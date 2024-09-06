@@ -10,7 +10,7 @@ public sealed class JobObject : IDisposable
 
 	static JobObject()
 	{
-		var info = new JOBOBJECT_BASIC_LIMIT_INFORMATION
+		JOBOBJECT_BASIC_LIMIT_INFORMATION info = new()
 		{
 			LimitFlags = JOBOBJECTLIMIT.KillOnJobClose
 		};
@@ -64,7 +64,7 @@ public sealed class JobObject : IDisposable
 
 	public bool AddProcess(int processId)
 	{
-		using var process = Process.GetProcessById(processId);
+		using Process process = Process.GetProcessById(processId);
 		return AddProcess(process);
 	}
 
