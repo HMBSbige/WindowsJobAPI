@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using WindowsJobAPI;
 
 namespace UnitTest;
@@ -9,7 +10,14 @@ public class UnitTest
 {
 	private static Process CreateCmd()
 	{
-		Process process = new() { StartInfo = { UseShellExecute = false, FileName = @"cmd" } };
+		Process process = new()
+		{
+			StartInfo =
+			{
+				UseShellExecute = RuntimeInformation.FrameworkDescription.Contains(@"Framework"),
+				FileName = @"cmd"
+			}
+		};
 		process.Start();
 		return process;
 	}
@@ -104,7 +112,7 @@ public class UnitTest
 		Process process = new() { StartInfo = { UseShellExecute = true, FileName = @"cmd" } };
 		process.Start();
 
-		/*using*/
+		using
 		JobObject job = new();
 		Assert.IsTrue(job.AddProcess(process));
 		Assert.IsFalse(process.HasExited);
