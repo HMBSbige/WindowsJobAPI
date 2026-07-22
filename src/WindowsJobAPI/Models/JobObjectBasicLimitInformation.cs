@@ -1,11 +1,11 @@
 namespace WindowsJobAPI.Models;
 
 [StructLayout(LayoutKind.Sequential)]
-internal struct JOBOBJECT_BASIC_LIMIT_INFORMATION
+internal struct JobObjectBasicLimitInformation
 {
 	public long PerProcessUserTimeLimit;
 	public long PerJobUserTimeLimit;
-	public JOBOBJECTLIMIT LimitFlags;
+	public JobObjectLimit LimitFlags;
 	public nuint MinimumWorkingSetSize;
 	public nuint MaximumWorkingSetSize;
 	public uint ActiveProcessLimit;

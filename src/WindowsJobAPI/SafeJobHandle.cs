@@ -9,8 +9,7 @@ public sealed class SafeJobHandle : SafeHandleZeroOrMinusOneIsInvalid
 
 	protected override bool ReleaseHandle()
 	{
-		WinApi.TerminateJobObject(handle, 0);
-
-		return WinApi.CloseHandle(handle);
+		_ = WinApi.TerminateJobObject(handle, 0);
+		return WinApi.CloseHandle(handle) is not 0;
 	}
 }

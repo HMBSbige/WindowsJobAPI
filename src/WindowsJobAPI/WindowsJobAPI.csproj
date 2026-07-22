@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <PackageId>WindowsJobAPI</PackageId>
+    <Description>Manage Windows Job Objects and terminate assigned processes when the job closes.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>windows job-object jobapi2 process win32</PackageTags>
+    <Copyright>Copyright © HMBSbige</Copyright>
+    <PackageProjectUrl>https://github.com/HMBSbige/WindowsJobAPI</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/HMBSbige/WindowsJobAPI</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <DisableRuntimeMarshalling>true</DisableRuntimeMarshalling>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="WindowsJobAPI.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+</Project>

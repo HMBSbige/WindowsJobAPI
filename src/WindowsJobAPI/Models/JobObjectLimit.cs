@@ -1,10 +1,10 @@
 namespace WindowsJobAPI.Models;
 
 [Flags]
-internal enum JOBOBJECTLIMIT : uint
+internal enum JobObjectLimit : uint
 {
-	// Basic Limits
-	Workingset = 0x00000001,
+	// Basic limits
+	WorkingSet = 0x00000001,
 	ProcessTime = 0x00000002,
 	JobTime = 0x00000004,
 	ActiveProcess = 0x00000008,
@@ -13,7 +13,7 @@ internal enum JOBOBJECTLIMIT : uint
 	PreserveJobTime = 0x00000040,
 	SchedulingClass = 0x00000080,
 
-	// Extended Limits
+	// Extended limits
 	ProcessMemory = 0x00000100,
 	JobMemory = 0x00000200,
 	DieOnUnhandledException = 0x00000400,
@@ -22,7 +22,7 @@ internal enum JOBOBJECTLIMIT : uint
 	KillOnJobClose = 0x00002000,
 	SubsetAffinity = 0x00004000,
 
-	// Notification Limits
+	// Notification limits
 	JobReadBytes = 0x00010000,
 	JobWriteBytes = 0x00020000,
 	RateControl = 0x00040000,

@@ -1,7 +1,7 @@
 namespace WindowsJobAPI.Models;
 
 [StructLayout(LayoutKind.Sequential)]
-internal struct IO_COUNTERS
+internal struct IoCounters
 {
 	public ulong ReadOperationCount;
 	public ulong WriteOperationCount;

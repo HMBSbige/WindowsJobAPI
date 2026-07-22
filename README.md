@@ -1,27 +1,30 @@
 # WindowsJobAPI
 
-Channel | Status
--|-
-CI | [![CI](https://github.com/HMBSbige/WindowsJobAPI/workflows/CI/badge.svg)](https://github.com/HMBSbige/WindowsJobAPI/actions)
-NuGet.org | [![NuGet.org](https://img.shields.io/nuget/v/WindowsJobAPI.svg)](https://www.nuget.org/packages/WindowsJobAPI/)
+[![NuGet](https://img.shields.io/nuget/v/WindowsJobAPI.svg?logo=nuget)](https://www.nuget.org/packages/WindowsJobAPI/)
 
-# Usage
+A small .NET library for grouping processes in a Windows Job Object. Disposing the job terminates every process assigned to it.
+
+## Usage
+
 ```csharp
-var process = new Process
+using System.Diagnostics;
+using WindowsJobAPI;
+
+using Process process = Process.Start(new ProcessStartInfo
 {
-    StartInfo =
-    {
-        UseShellExecute = true,
-        FileName = @"cmd"
-    }
-};
-process.Start();
+    FileName = "cmd.exe",
+    UseShellExecute = false,
+}) ?? throw new InvalidOperationException("Unable to start the process.");
 
-var job = new JobObject();
+using JobObject job = new();
+if (!job.AddProcess(process))
+{
+    throw new InvalidOperationException("Unable to add the process to the job.");
+}
 
-job.AddProcess(process);
-//job.AddProcess(process.SafeHandle);
-//job.AddProcess(process.Id);
-
-job.Dispose();
+// Disposing job terminates process and any child processes in the same job.
 ```
+
+## License
+
+[MIT](LICENSE)
