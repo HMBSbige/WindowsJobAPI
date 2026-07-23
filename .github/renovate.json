@@ -8,7 +8,12 @@
     ":configMigration",
     ":automergeBranch",
     ":automergeDigest",
-    ":automergeMinor",
-    "schedule:weekly"
+    ":automergeMinor"
+  ],
+  "schedule": [
+    "* 0-3 8-14 * 3"
+  ],
+  "labels": [
+    "Automatic"
   ]
 }
