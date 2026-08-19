@@ -2,10 +2,12 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using WindowsJobAPI.Models;
 
 namespace WindowsJobAPI.Tests;
 
+[SupportedOSPlatform("windows")]
 internal sealed class JobObjectTests
 {
 	private static readonly TimeSpan ProcessExitTimeout = TimeSpan.FromSeconds(5);
