@@ -4,6 +4,8 @@
 
 A small .NET library for grouping processes in a Windows Job Object. Disposing the job terminates every process assigned to it.
 
+> **Note:** Starting with .NET 11, if you only need a newly started child process to terminate when its parent process exits, use the built-in `ProcessStartInfo.KillOnParentExit` property instead.
+
 ## Usage
 
 ```csharp
